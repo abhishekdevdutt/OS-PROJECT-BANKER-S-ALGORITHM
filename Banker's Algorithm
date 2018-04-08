@@ -1,0 +1,108 @@
+#include <stdio.h>
+int main()
+{
+  int MAX[10][10], NEED[10][10], ALLOCATION[10][10], AVAILABLE[10], completed[10],safesequence[10];
+  int numberofprocesses, numberofresources, i, j, k, process, count=0;
+	printf("\nENTER THE NUMBER OF PROCESSES\n");
+  scanf("%d", &numberofprocesses);
+	for(i = 0; i< numberofprocesses; i++)
+	  {
+      completed[i] = 0;
+    }
+	printf("\nENTER THE NUMBER OF RESOURCES\n");
+  scanf("%d", &numberofresources);
+	printf("\n\nENTER THE MAX MATRIX FOR EACH PROCESS\n");
+  for(i = 0; i < numberofprocesses; i++)
+    {
+      printf("\nFOR PROCESS %d : ", i + 1);
+      for(j = 0; j < numberofresources; j++)
+        {
+          scanf("%d", &MAX[i][j]);
+        }
+    }
+	printf("\n\nENTER THE ALLOCATION MATRIX\n");
+  for(i = 0; i < numberofprocesses; i++)
+    {
+      printf("\nFOR PROCESS %d : ",i + 1);
+      for(j = 0; j < numberofresources; j++)
+        {
+				  scanf("%d", &ALLOCATION[i][j]);
+        }
+    }
+	printf("\n\nENTER THE AVAILABLE MATRIX \n");
+  for(i = 0; i < numberofresources; i++)
+    {
+			scanf("%d", &AVAILABLE[i]);
+		}
+   for(i = 0; i < numberofprocesses; i++)
+    {
+			for(j = 0; j < numberofresources; j++)
+      	{
+					NEED[i][j] = MAX[i][j] - ALLOCATION[i][j];
+				}
+		}
+	printf("\nMAX MATRIX:\t ALLOCATION MATRIX :\n");
+	for(i = 0; i < numberofprocesses; i++)
+    {
+      for( j = 0; j < numberofresources; j++)
+        {
+				  printf("%d ", MAX[i][j]);
+				}
+		  printf("\t\t");
+			goto A;
+			A:  for( j = 0; j < numberofresources; j++)
+            {
+						  printf("%d ", ALLOCATION[i][j]);
+					  }	
+           printf("\n");		
+     }
+    do
+       {        
+	   	   process = -1;
+			   for(i = 0; i < numberofprocesses; i++)
+          {
+            if(completed[i] == 0)//if not completed
+              {
+                process = i ;
+                for(j = 0; j < numberofresources; j++)
+                  {
+                    if(AVAILABLE[j] < NEED[i][j])
+                      {
+                        process = -1;
+                        break;
+                       }
+                   }
+                }
+             	if(process != -1)
+              break;
+             }
+			if(process != -1)
+        {
+          printf("\nPROCESS %d RUNS TO COMPLETION!", process + 1);
+          safesequence[count] = process + 1;
+          count++;
+          for(j = 0; j < numberofresources; j++)
+            {
+              AVAILABLE[j] += ALLOCATION[process][j];
+              ALLOCATION[process][j] = 0;
+              MAX[process][j] = 0;
+              completed[process] = 1;
+             }
+          }
+    	   }while(count != numberofprocesses && process != -1);
+	if(count == numberofprocesses)
+  	{
+      printf("\nTHE SYSTEM IS IN SAFE STATE!!\n");
+      printf("SAFE SEQUENCE IS : < ");
+      for( i = 0; i < numberofprocesses; i++)
+        {
+					printf("%d ", safesequence[i]);
+         }
+        	printf(">\n");
+     }
+    else
+      {	
+        printf("\nTHE SYSTEM IS NOT IN SAFE STATE!!");
+		  }
+	return 0;
+	}
