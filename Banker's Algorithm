@@ -7,6 +7,8 @@ int main()
   printf("\t\t\t\t        _____________________________       \n\n\n\n");
 	printf("\nENTER THE NUMBER OF PROCESSES\n");
   scanf("%d", &numberofprocesses);
+   if(numberofprocesses>0)
+  {
 	for(i = 0; i< numberofprocesses; i++)
 	  {
       completed[i] = 0;
@@ -114,5 +116,10 @@ int main()
     	{	
         	printf("\nTHE SYSTEM IS NOT IN SAFE STATE!!");
 		}
+		}
+			else
+	{
+		printf("YOU HAVE ENTERED NUMBER OF PROCESSES AS ZERO(0), IF NO PROCESS IS THERE THEN NO RESOURCES WILL BE ALLOCATED..");
+	}
 	return 0;
 	}
