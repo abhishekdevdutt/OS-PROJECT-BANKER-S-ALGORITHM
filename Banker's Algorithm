@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-  int MAX[10][10], NEED[10][10], ALLOCATION[10][10], AVAILABLE[10], completed[10],safesequence[10],safety[10],work[10],finish[10];
+  int MAX[10][10], NEED[10][10], ALLOCATION[10][10], AVAILABLE[10], completed[10],safesequence[10];
   int numberofprocesses, numberofresources, i, j, k, process, count=0;
   printf("\n\n\t\t\t\t********WELCOME TO BANKER'S ALGORITHM*******\n");
   printf("\t\t\t\t        _____________________________       \n\n\n\n");
