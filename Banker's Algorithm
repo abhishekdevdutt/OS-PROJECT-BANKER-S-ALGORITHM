@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-  int MAX[10][10], NEED[10][10], ALLOCATION[10][10], AVAILABLE[10], completed[10],safesequence[10];
+  int MAX[10][10], NEED[10][10], ALLOCATION[10][10], AVAILABLE[10], FINISH[10],safesequence[10];
   int numberofprocesses, numberofresources, i, j, k, process, count=0;
   printf("\n\n\t\t\t\t********WELCOME TO BANKER'S ALGORITHM*******\n");
   printf("\t\t\t\t        _____________________________       \n\n\n\n");
@@ -11,7 +11,7 @@ int main()
   {
 	for(i = 0; i< numberofprocesses; i++)
 	  {
-      completed[i] = 0;
+      FINISH[i] = 0;
     }
 	printf("\nENTER THE NUMBER OF RESOURCES\n");
   scanf("%d", &numberofresources);
@@ -73,7 +73,7 @@ int main()
 	   		process = -1;
 			for(i = 0; i < numberofprocesses; i++)
           		{
-            		if(completed[i] == 0)//if not completed
+            		if(FINISH[i] == 0)
               			{
                 			process = i ;
                 			for(j = 0; j < numberofresources; j++)
@@ -98,7 +98,7 @@ int main()
               				AVAILABLE[j] += ALLOCATION[process][j];
               				ALLOCATION[process][j] = 0;
               				MAX[process][j] = 0;
-              				completed[process] = 1;
+              				FINISH[process] = 1;
              			}
           		}
     	}	while(count != numberofprocesses && process != -1);
